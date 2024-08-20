@@ -9,10 +9,15 @@ import java.util.List;
 public class Reader extends Person{
     private List<Book> borrowedBooks;
 
-    public Reader(String name) {
-        super(name);
-        this.borrowedBooks=new ArrayList<>();
+    public Reader(String name, String surname, List<Book> borrowedBooks) {
+        super(name, surname);
+        this.borrowedBooks = borrowedBooks;
     }
+    public Reader(String name, String surname, long TCKN, String phoneNumber, String email, List<Book> borrowedBooks) {
+        super(name, surname, TCKN, phoneNumber, email);
+        this.borrowedBooks = borrowedBooks;
+    }
+
     public List<Book> getBorrowedBooks(){
         return borrowedBooks;
     }

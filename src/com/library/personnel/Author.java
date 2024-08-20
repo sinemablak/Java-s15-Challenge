@@ -7,10 +7,12 @@ import java.util.List;
 
 public class Author extends Person{
     private List<Book> books;
-    public Author(String name){
-        super(name);
-        this.books=new ArrayList<>();
+
+    public Author(String name, String surname, long TCKN, String phoneNumber, String email, List<Book> books) {
+        super(name, surname, TCKN, phoneNumber, email);
+        this.books = books;
     }
+
     public void newBook(Book book){
         books.add(book);
     }
