@@ -1,11 +1,15 @@
 package com.library.personnel;
 
+import com.library.enums.BorrowingPeriod;
+
 public abstract class Person {
     private String name;
     private String surname;
     private String phoneNumber;
     private String email;
     private long TCKN;
+    private BorrowingPeriod borrowingPeriod;
+
 
     public Person(String name,String surname){
         this.name=name;
@@ -20,6 +24,11 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
+    public Person(String name) {
+        this.name=name;
+    }
+
 
     public String getName(){
         return name;
@@ -59,6 +68,14 @@ public abstract class Person {
     public void setTCKN(long TCKN) {
         this.TCKN = TCKN;
     }
+    public BorrowingPeriod getBorrowingPeriod() {
+        return borrowingPeriod;
+    }
+    public void setBorrowingPeriod(BorrowingPeriod borrowingPeriod) {
+        this.borrowingPeriod = borrowingPeriod;
+    }
+
+
 
     public abstract void whoYouAre();
 

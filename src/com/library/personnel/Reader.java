@@ -1,22 +1,37 @@
 package com.library.personnel;
 
 import com.library.books.Book;
-import com.library.books.BookStatus;
+import com.library.enums.BookStatus;
+import com.library.enums.BorrowingPeriod;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Reader extends Person{
     private List<Book> borrowedBooks;
+    private BorrowingPeriod borrowingPeriod;
 
-    public Reader(String name, String surname, List<Book> borrowedBooks) {
+    public Reader(String name, String surname) {
         super(name, surname);
-        this.borrowedBooks = borrowedBooks;
+        this.borrowedBooks = new ArrayList<>();
     }
+
+    public Reader(String name, String surname, long TCKN, String phoneNumber, String email) {
+        super(name, surname, TCKN, phoneNumber, email);
+        this.borrowedBooks = new ArrayList<>();
+    }
+
     public Reader(String name, String surname, long TCKN, String phoneNumber, String email, List<Book> borrowedBooks) {
         super(name, surname, TCKN, phoneNumber, email);
-        this.borrowedBooks = borrowedBooks;
+        this.borrowedBooks = borrowedBooks != null ? borrowedBooks : new ArrayList<>();
     }
+    public Reader(String name, BorrowingPeriod borrowingPeriod) {
+        super(name, ""); // Assuming Person's other fields can be empty or default
+        this.borrowedBooks = new ArrayList<>();
+        this.borrowingPeriod = borrowingPeriod;
+    }
+
 
     public List<Book> getBorrowedBooks(){
         return borrowedBooks;
@@ -24,6 +39,7 @@ public class Reader extends Person{
     public void purchaseBook(Book book){
         borrowedBooks.add(book);
         book.changeOwner(this);
+        this.borrowingPeriod = BorrowingPeriod.DEFAULT;
     }
     public void borrowBook(Book book) {
         if (borrowedBooks.size() < 5) {
@@ -31,7 +47,9 @@ public class Reader extends Person{
                 borrowedBooks.add(book);
                 book.updateStatus(BookStatus.BORROWED);
                 book.setOwner(this);
-                System.out.println("Successfully borrowed book: " + book.getTitle());
+                LocalDate dueDate = LocalDate.now().plusDays(borrowingPeriod.getDays()); // Use borrowingPeriod field
+                System.out.println("Successfully borrowed book: " + book.getTitle() +
+                        ". Please return it by: " + dueDate);
             } else {
                 System.out.println("The book is not available for borrowing.");
             }
@@ -64,6 +82,7 @@ public class Reader extends Person{
             System.out.println("Owner: Not assigned");
         }
     }
+
 
 
     @Override

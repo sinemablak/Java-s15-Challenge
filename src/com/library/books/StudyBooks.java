@@ -1,5 +1,6 @@
 package com.library.books;
 
+import com.library.enums.BookStatus;
 import com.library.personnel.Author;
 
 import java.time.LocalDate;

@@ -13,6 +13,16 @@ public class Author extends Person{
         this.books = books;
     }
 
+    public Author(String name, String surname, List<Book> books) {
+        super(name, surname);
+        this.books = books;
+    }
+    public Author(String name) {
+        super(name, "", 0, "", ""); // Varsayılan değerler
+        this.books = new ArrayList<>();
+    }
+
+
     public void newBook(Book book){
         books.add(book);
     }
